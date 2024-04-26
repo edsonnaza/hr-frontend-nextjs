@@ -7,6 +7,23 @@ const {
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
+async function clearTables(client) {
+  try {
+    // Eliminar todos los datos de las tablas existentes
+    await client.query('DELETE FROM invoices');
+    await client.query('DELETE FROM customers');
+    await client.query('DELETE FROM revenue');
+    await client.query('DELETE FROM users');
+
+    console.log('Tablas limpiadas');
+
+    return true;
+  } catch (error) {
+    console.error('Error al limpiar las tablas:', error);
+    throw error;
+  }
+}
+
 async function seedUsers(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -162,7 +179,7 @@ async function seedRevenue(client) {
 
 async function main() {
   const client = await db.connect();
-
+  await clearTables(client);
   await seedUsers(client);
   await seedCustomers(client);
   await seedInvoices(client);
