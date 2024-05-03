@@ -1,8 +1,11 @@
+'use client'
 import Image from 'next/image';
-import { UpdateEmpleado, DeleteEmpleado } from '@/app/ui/empleados/buttons';
+import { UpdateEmpleado, DeleteEmpleado, EmpleadoDetails } from '@/app/ui/empleados/buttons';
 import EmpleadoStatus from '@/app/ui/empleados/status';
-import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
+import { formatDateToLocal, formatCurrency, formatCurrencyGs } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default async function InvoicesTable({
   query,
@@ -11,44 +14,81 @@ export default async function InvoicesTable({
   query: string;
   currentPage: number;
 }) {
-  const invoices = await fetchFilteredInvoices(query, currentPage);
+  //const invoices = await fetchFilteredInvoices(query, currentPage);
+  interface Empleado {
+    empleado_id: string;
+    nombres: string;
+    apellidos: string;
+    descripcion:string;
+    imagen_principal:string;
+    activo:boolean;
+    Remuneraciones:Remuneraciones[];
+    fechaIngreso:string;
+    CatFuns: CatFun[];
+
+    // Otras propiedades...
+  }
+
+  interface CatFun {
+    catfun_nombre: string;
+  }
+  interface Remuneraciones {
+    importe:number;
+  }
+  const [empleados, setEmpleados] = useState<Empleado[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3500/hr/empleados');
+        const data = await response.json();
+        setEmpleados(data);
+      } catch (error) {
+        console.error('Error fetching empleados:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            {invoices?.map((invoice) => (
+            {empleados?.map((empleado) => (
               <div
-                key={invoice.id}
+                key={empleado.empleado_id}
                 className="mb-2 w-full rounded-md bg-white p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
-                        src={invoice.image_url}
+                        src={empleado.imagen_principal}
                         className="mr-2 rounded-full"
                         width={28}
                         height={28}
-                        alt={`${invoice.name}'s profile picture`}
+                        alt={`${empleado.nombres}'s profile picture`}
                       />
-                      <p>{invoice.name}</p>
+                      <p>{empleado.nombres}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{invoice.email}</p>
+                    <p className="text-sm text-gray-500">{empleado.nombres +' ' +empleado.apellidos}</p>
                   </div>
-                  <EmpleadoStatus status={invoice.status} />
+                  <EmpleadoStatus activo={empleado.activo} />
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
                     <p className="text-xl font-medium">
-                      {formatCurrency(invoice.amount)}
+                      {
+                      formatCurrencyGs(parseFloat(empleado['Remuneraciones']['0'].importe.toString()))}
                     </p>
-                    <p>{formatDateToLocal(invoice.date)}</p>
+                    <p>{empleado.fechaIngreso                    
+                      }</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <UpdateEmpleado id={invoice.id} />
-                    <DeleteEmpleado id={invoice.id} />
+                    <UpdateEmpleado id={empleado.empleado_id} />
+                    <DeleteEmpleado id={empleado.empleado_id} />
                   </div>
                 </div>
               </div>
@@ -61,13 +101,13 @@ export default async function InvoicesTable({
                   Empleado
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email
+                  Fecha Ingreso
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Salario base
+                  Remuneración Base
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Fecha
+                  Categoria
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Estado
@@ -78,39 +118,49 @@ export default async function InvoicesTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {invoices?.map((invoice) => (
+              {empleados?.map((empleado) => (
                 <tr
-                  key={invoice.id}
+                  key={empleado.empleado_id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
                       <Image
-                        src={invoice.image_url}
+                        src={empleado.imagen_principal}
                         className="rounded-full"
                         width={28}
                         height={28}
-                        alt={`${invoice.name}'s profile picture`}
+                        alt={`${empleado.nombres}'s profile picture`}
                       />
-                      <p>{invoice.name}</p>
+                      <p>{empleado.nombres +' '+ empleado.apellidos}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {invoice.email}
+                    {formatDateToLocal(empleado.fechaIngreso)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatCurrency(invoice.amount)}
+                    { 
+                      empleado.Remuneraciones?.map((value)=>(
+
+                        formatCurrencyGs(parseFloat(value.importe.toString()))
+                      ))}
+                   
+                      
+                  </td>
+
+                  <td className="whitespace-nowrap px-3 py-3">
+                  {empleado.CatFuns?.map((catfun) => (
+                    catfun.catfun_nombre
+                  ))}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(invoice.date)}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    <EmpleadoStatus status={invoice.status} />
+                    <EmpleadoStatus activo={empleado.activo} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <UpdateEmpleado id={invoice.id} />
-                      <DeleteEmpleado id={invoice.id} />
+                    <EmpleadoDetails id={empleado.empleado_id} />
+                      <UpdateEmpleado id={empleado.empleado_id} />
+                      <DeleteEmpleado id={empleado.empleado_id} />
                     </div>
                   </td>
                 </tr>

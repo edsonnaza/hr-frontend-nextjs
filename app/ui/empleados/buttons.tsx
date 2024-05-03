@@ -1,6 +1,7 @@
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, PlusIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { deleteEmpleado } from '@/app/lib/actionsEmpleados';
+import { UUID } from 'crypto';
 export function CreateEmpleado() {
   return (
     <Link
@@ -13,6 +14,16 @@ export function CreateEmpleado() {
   );
 }
 
+export function EmpleadoDetails({ id }: { id: string }) {
+  return (
+    <Link
+    href={`/dashboard/empleados/${id}/details`}
+      className="rounded-md border p-2 hover:bg-gray-100"
+    >
+      <EyeIcon className="w-5" />
+    </Link>
+  );
+}
 export function UpdateEmpleado({ id }: { id: string }) {
   return (
     <Link

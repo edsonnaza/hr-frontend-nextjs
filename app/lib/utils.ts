@@ -6,6 +6,15 @@ export const formatCurrency = (amount: number) => {
     currency: 'USD',
   });
 };
+export const formatCurrencyGs = (amount: number) => {
+  // Formatear la cantidad en guaraníes con el símbolo "G"
+  return amount.toLocaleString('es-PY', {
+    style: 'currency',
+    currency: 'PYG',
+    minimumFractionDigits: 0, // Para eliminar los decimales
+    maximumFractionDigits: 0, // Para eliminar los decimales
+  });
+};
 
 export const formatDateToLocal = (
   dateStr: string,
@@ -13,11 +22,11 @@ export const formatDateToLocal = (
 ) => {
   const date = new Date(dateStr);
   const options: Intl.DateTimeFormatOptions = {
-    day: 'numeric',
-    month: 'short',
+    day: '2-digit',
+    month: '2-digit',
     year: 'numeric',
   };
-  const formatter = new Intl.DateTimeFormat(locale, options);
+  const formatter = new Intl.DateTimeFormat(undefined, options);
   return formatter.format(date);
 };
 
