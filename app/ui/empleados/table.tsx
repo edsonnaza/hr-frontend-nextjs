@@ -5,8 +5,9 @@ import EmpleadoStatus from '@/app/ui/empleados/status';
 import { formatDateToLocal, formatCurrency, formatCurrencyGs } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-
+ 
+const URL = process.env.NEXT_PUBLIC_DEPLOY_URL;
+console.log(URL)
 export default async function InvoicesTable({
   query,
   currentPage,
@@ -40,7 +41,7 @@ export default async function InvoicesTable({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3500/hr/empleados');
+        const response = await fetch(`${URL}/empleados`);
         const data = await response.json();
         setEmpleados(data);
       } catch (error) {
