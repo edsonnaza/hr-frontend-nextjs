@@ -12,34 +12,6 @@ const EmpleadoDetails = ({empleado}) => {
   }
 
   return (
-   
-    // <div> 
-    //   <h1>Detalles del empleado</h1>
-      
-    //    <div>
-    //      <p>Foto:  <Image
-    //                     src={empleado.imagen_principal}
-    //                     className="mr-2 rounded-full"
-    //                     width={28}
-    //                     height={28}
-    //                     alt={`${empleado.nombres}'s profile picture`}
-    //                   /></p>
-
-    //      <p>Nombres: {empleado.nombres}</p>
-    //      <p>Apellidos: {empleado.apellidos}</p>
-    //      <p>Descripcion: {empleado.descripcion}</p>   
-    //      <p>Categoría: {empleado.fechaNacimiento}</p>
-    //      <p>Genero: {empleado.genero}</p>
-    //      <p>Fecha Ingreso: {empleado.fechaIngreso}</p>
-    //      <p>Remuneracion: {empleado['Remuneraciones'][0].importe}</p>
-    //      <p>Categoría: {empleado['CatFuns'][0]?.catfun_nombre}</p>
-    //      <p>Horas Catedras Mensual: {empleado['HorasCatedrasMensuals'][0]?.total}</p>
-    //      <p>Seguro Médico: {empleado['SeguroMedicoEmpleados'][0]?.importe_mensual}</p>
-
-
-    //    </div>
-     
-    // </div>
     <div>
       <div className="px-4 sm:px-0">
         <h3 className="text-base font-semibold leading-7 text-gray-900">Infomarción del Empleado</h3>
@@ -48,22 +20,22 @@ const EmpleadoDetails = ({empleado}) => {
       <div className="mt-6 border-t border-gray-100">
         <dl className="divide-y divide-gray-100">
         <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-  <dt className="text-sm font-medium leading-6 text-gray-900">Nombres</dt>
-  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 flex items-center">
-    <div className="mr-2">
-      <Image
-        src={empleado.imagen_principal}
-        className="rounded-full"
-        width={28}
-        height={28}
-        alt={`${empleado.nombres}'s profile picture`}
-      />
-    </div>
-    <div>
-      {empleado.nombres + ' ' + empleado.apellidos}
-    </div>
-  </dd>
-</div>
+        <dt className="text-sm font-medium leading-6 text-gray-900">Nombres</dt>
+        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 flex items-center">
+          <div className="mr-2">
+            <Image
+              src={empleado.imagen_principal}
+              className="rounded-full"
+              width={28}
+              height={28}
+              alt={`${empleado.nombres}'s profile picture`}
+            />
+          </div>
+          <div>
+            {empleado.nombres + ' ' + empleado.apellidos}
+          </div>
+        </dd>
+      </div>
 
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">Tipo de Empleado</dt>

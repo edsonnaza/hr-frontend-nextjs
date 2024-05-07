@@ -14,26 +14,12 @@ export const metadata: Metadata = {
   title: 'Empleados',
 };
 
-
-
- 
-
 interface PageEmpleados {
   empleados: any[]; // Reemplaza 'any[]' con el tipo más específico si es posible
 }
 
  
-export default async function PageEmpleados({
-  searchParams,
-  
-}: {
-  searchParams?: {
-    query?: string;
-    page?: string;
-    
-  },
-  
-}) {
+export default async function PageEmpleados() {
   //const query = searchParams?.query || '';
  // const currentPage = Number(searchParams?.page) || 1; 
  // const totalPages = await fetchEmpleadosPages(query);
