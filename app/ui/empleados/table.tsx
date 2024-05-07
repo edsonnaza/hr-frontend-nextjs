@@ -1,63 +1,34 @@
-'use client'
 import Image from 'next/image';
 import { UpdateEmpleado, DeleteEmpleado, EmpleadoDetails } from '@/app/ui/empleados/buttons';
 import EmpleadoStatus from '@/app/ui/empleados/status';
-import { formatDateToLocal, formatCurrency, formatCurrencyGs } from '@/app/lib/utils';
-import { fetchFilteredInvoices } from '@/app/lib/data';
-import { useState, useEffect } from 'react';
+import { formatDateToLocal, formatCurrencyGs } from '@/app/lib/utils';
+import { fetchFilteredEmpleados, getEmpleados } from '@/app/lib/dataEmpleados';
+//import { handleToken } from '@/app/lib/getToken';
  
-const URL = process.env.NEXT_PUBLIC_DEPLOY_URL;
-console.log(URL)
-export default async function InvoicesTable({
+ 
+ //const URL = process.env.NEXT_PUBLIC_LOCAL_URL;
+// //const token = process.env.NEXT_PUBLIC_TOKEN;
+ 
+
+export default async function EmpleadoTable({
   query,
   currentPage,
+  empleados,
 }: {
   query: string;
   currentPage: number;
+  empleados:any[];
 }) {
-  //const invoices = await fetchFilteredInvoices(query, currentPage);
-  interface Empleado {
-    empleado_id: string;
-    nombres: string;
-    apellidos: string;
-    descripcion:string;
-    imagen_principal:string;
-    activo:boolean;
-    Remuneraciones:Remuneraciones[];
-    fechaIngreso:string;
-    CatFuns: CatFun[];
-
-    // Otras propiedades...
-  }
-
-  interface CatFun {
-    catfun_nombre: string;
-  }
-  interface Remuneraciones {
-    importe:number;
-  }
-  const [empleados, setEmpleados] = useState<Empleado[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${URL}/empleados`);
-        const data = await response.json();
-        setEmpleados(data);
-      } catch (error) {
-        console.error('Error fetching empleados:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+ 
+// const empleados = await getEmpleados();
+  
   return (
+    
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            {empleados?.map((empleado) => (
+            {empleados?.map((empleado:any) => (
               <div
                 key={empleado.empleado_id}
                 className="mb-2 w-full rounded-md bg-white p-4"
@@ -119,7 +90,7 @@ export default async function InvoicesTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {empleados?.map((empleado) => (
+              {empleados?.map((empleado:any) => (
                 <tr
                   key={empleado.empleado_id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
@@ -141,7 +112,7 @@ export default async function InvoicesTable({
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     { 
-                      empleado.Remuneraciones?.map((value)=>(
+                      empleado.Remuneraciones?.map((value:any)=>(
 
                         formatCurrencyGs(parseFloat(value.importe.toString()))
                       ))}
@@ -150,7 +121,7 @@ export default async function InvoicesTable({
                   </td>
 
                   <td className="whitespace-nowrap px-3 py-3">
-                  {empleado.CatFuns?.map((catfun) => (
+                  {empleado.CatFuns?.map((catfun:any) => (
                     catfun.catfun_nombre
                   ))}
                   </td>
