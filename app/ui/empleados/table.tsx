@@ -2,12 +2,7 @@ import Image from 'next/image';
 import { UpdateEmpleado, DeleteEmpleado, EmpleadoDetails } from '@/app/ui/empleados/buttons';
 import EmpleadoStatus from '@/app/ui/empleados/status';
 import { formatDateToLocal, formatCurrencyGs } from '@/app/lib/utils';
-import { fetchFilteredEmpleados, getEmpleados } from '@/app/lib/dataEmpleados';
-//import { handleToken } from '@/app/lib/getToken';
  
- 
- //const URL = process.env.NEXT_PUBLIC_LOCAL_URL;
-// //const token = process.env.NEXT_PUBLIC_TOKEN;
  
 
 export default async function EmpleadoTable({
@@ -130,7 +125,7 @@ export default async function EmpleadoTable({
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                    <EmpleadoDetails id={empleado.empleado_id} />
+                      <EmpleadoDetails id={empleado.empleado_id} />
                       <UpdateEmpleado id={empleado.empleado_id} />
                       <DeleteEmpleado id={empleado.empleado_id} />
                     </div>
