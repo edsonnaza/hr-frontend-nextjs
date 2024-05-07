@@ -34,9 +34,9 @@ export default async function PageEmpleados({
   },
   
 }) {
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1; 
-  const totalPages = await fetchEmpleadosPages(query);
+  //const query = searchParams?.query || '';
+ // const currentPage = Number(searchParams?.page) || 1; 
+ // const totalPages = await fetchEmpleadosPages(query);
   const token = await handleToken();
   const empleados = await getEmpleados(token);
   return (
@@ -48,8 +48,8 @@ export default async function PageEmpleados({
         <Search placeholder="Buscar empleado..." />
         <CreateEmpleado />
       </div>
-      <Suspense key={query + currentPage} fallback={<EmpleadosTableSkeleton />}>
-        <Table query={query} empleados={empleados} currentPage={currentPage} />
+      <Suspense  fallback={<EmpleadosTableSkeleton />}>
+        <Table   empleados={empleados}   />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
       {/* <Pagination totalPages={totalPages} /> */}

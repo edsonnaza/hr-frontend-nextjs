@@ -6,12 +6,12 @@ import { formatDateToLocal, formatCurrencyGs } from '@/app/lib/utils';
  
 
 export default async function EmpleadoTable({
-  query,
-  currentPage,
+  //query,
+  //currentPage,
   empleados,
 }: {
-  query: string;
-  currentPage: number;
+  //query: string;
+  //currentPage: number;
   empleados:any[];
 }) {
  
