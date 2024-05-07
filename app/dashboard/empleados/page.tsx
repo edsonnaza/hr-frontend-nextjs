@@ -1,5 +1,5 @@
  
-import Pagination from '@/app/ui/empleados/pagination';
+//import Pagination from '@/app/ui/empleados/pagination';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/empleados/table';
 import { CreateEmpleado } from '@/app/ui/empleados/buttons';
