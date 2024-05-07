@@ -1,4 +1,5 @@
-const URL_LOGIN = process.env.NEXT_PUBLIC_LOCAL_URL;
+//const URL_LOGIN = process.env.NEXT_PUBLIC_LOCAL_URL;
+const URL_LOGIN = process.env.NEXT_PUBLIC_DEPLOY_URL;
 
 
 

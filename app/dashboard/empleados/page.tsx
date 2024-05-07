@@ -6,7 +6,7 @@ import { CreateEmpleado } from '@/app/ui/empleados/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { EmpleadosTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
-import { fetchEmpleadosPages, getEmpleados } from '@/app/lib/dataEmpleados';
+import { getEmpleados } from '@/app/lib/dataEmpleados';
 import { handleToken } from '@/app/lib/getToken';
 import { Metadata } from 'next';
  
