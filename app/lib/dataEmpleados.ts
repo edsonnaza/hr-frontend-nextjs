@@ -281,14 +281,14 @@ export async function getUser(email: string) {
 export async function getEmpleados(token:string) {
   try {
     
-    // if (!token) {
-    //   throw new Error(`No se pudo obtener el token: ${token}`);
-    // }
+    if (!token) {
+      throw new Error(`No se pudo obtener el token: ${token}`);
+    }
  const response= await fetch(`${URL}/empleados`,{
       method: 'GET',
       headers: {
-       // 'Content-Type': 'application/json',
-       // 'Authorization': `Bearer ${token}`
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${token}`
       }
     });
     if (!response.ok) {
