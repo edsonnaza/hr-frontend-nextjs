@@ -26,6 +26,8 @@ export default async function PageEmpleados() {
   const token = await handleToken();
   const empleados = await getEmpleados(token);
   return (
+    <Suspense>
+
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
         <h1 className={`${lusitana.className} text-2xl`}>Empleados</h1>
@@ -38,9 +40,13 @@ export default async function PageEmpleados() {
         <Table   empleados={empleados}   />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
+     
+
       {/* <Pagination totalPages={totalPages} /> */}
+        
       </div>
     </div>
+    </Suspense>
   );
 }
  
