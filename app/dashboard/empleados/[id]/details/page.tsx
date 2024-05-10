@@ -2,7 +2,7 @@ import EmpleadoDetails from '@/app/ui/empleados/EmpleadoDetails';
 import Breadcrumbs from '@/app/ui/empleados/breadcrumbs';
  
 import { notFound } from 'next/navigation';
-const URL = process.env.NEXT_PUBLIC_LOCAL_URL;
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 const token = process.env.NEXT_PUBLIC_TOKEN;
 
  

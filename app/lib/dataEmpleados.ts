@@ -12,7 +12,7 @@ import {
 import { formatCurrency } from './utils';
 import { handleToken } from './getToken';
 //const URL = process.env.NEXT_PUBLIC_LOCAL_URL;
-const URL = process.env.NEXT_PUBLIC_DEPLOY_URL;
+const URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.

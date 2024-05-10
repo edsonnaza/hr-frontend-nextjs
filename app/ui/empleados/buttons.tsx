@@ -1,11 +1,11 @@
 import { PencilIcon, PlusIcon, TrashIcon, EyeIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { deleteEmpleado } from '@/app/lib/actionsEmpleados';
-import { UUID } from 'crypto';
+ 
 export function CreateEmpleado() {
   return (
     <Link
-      href="/dashboard/invoices/create"
+      href="/dashboard/empleados/create"
       className="flex h-10 items-center rounded-lg bg-blue-600 px-4 text-sm font-medium text-white transition-colors hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
     >
       <span className="hidden md:block">Registrar Empleado</span>{' '}
