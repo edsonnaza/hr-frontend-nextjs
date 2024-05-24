@@ -1,9 +1,21 @@
-import Form from '@/app/ui/invoices/create-form';
-import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
-import { fetchCustomers } from '@/app/lib/data';
+import CreateFormEmpleado from '@/app/ui/empleados/create-form';
+import Breadcrumbs from '@/app/ui/empleados/breadcrumbs';
+import { fetchCategories } from '@/app/lib/dataCategory';
+import { fetchSeguros } from '@/app/lib/dataSeguros';
  
-export default async function Page() {
-  const customers = await fetchCustomers();
+interface Category {
+  catfun_id: string;
+  catfun_nombre: string;
+}
+
+interface Seguros {
+  seguromedico_id: string;
+  seguromedico_nombre: string;
+}
+export default async function Page()  {
+  
+  const categories   = await fetchCategories(); 
+  const seguros = await fetchSeguros();  
  
   return (
     <main>
@@ -17,7 +29,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form customers={customers} />
+      < CreateFormEmpleado categories={categories} seguros={seguros}  />
     </main>
   );
 }

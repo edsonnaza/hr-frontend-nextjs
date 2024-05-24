@@ -26,6 +26,8 @@ export type Invoice = {
   status: 'pending' | 'paid';
 };
 
+
+
 export type Revenue = {
   month: string;
   revenue: number;
@@ -85,4 +87,20 @@ export type InvoiceForm = {
   customer_id: string;
   amount: number;
   status: 'pending' | 'paid';
+};
+
+
+export type EmpleadoFields = {
+  empleado_id: string;
+  nombres: string;
+  apellidos: string;
+  descripcion: string;
+  email: string;
+  phone: string;
+  imagen_principal: string;
+  fechaIngreso: Date;
+  fechaNacimiento: Date;
+  genero: 'Hombre' | 'Mujer';
+  activo: boolean;
+  fechaDesvinculado?: Date;
 };
